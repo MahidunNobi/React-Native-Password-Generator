@@ -63,7 +63,7 @@ export default function App() {
 
   return (
     <View>
-      <Text>App</Text>
+      <Text>This is a React Native Password Generator</Text>
     </View>
   );
 }
