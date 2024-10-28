@@ -48,7 +48,6 @@ export default function App() {
     if (symbols) {
       characterList += SYMBOLS;
     }
-
     const passwordResult = createPassword(characterList, passLength);
 
     setPassword(passwordResult);
@@ -81,7 +80,6 @@ export default function App() {
             initialValues={{passwordLength: ''}}
             validationSchema={PasswordSchema}
             onSubmit={values => {
-              console.log(values);
               generatePassword(+values.passwordLength);
             }}>
             {({
@@ -153,13 +151,23 @@ export default function App() {
                     onPress={handleSubmit}>
                     <Text style={styles.btnText}> Generate Password </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.secoundryBtn}>
+                  <TouchableOpacity
+                    style={styles.secoundryBtn}
+                    onPress={() => {
+                      handleReset();
+                      resetPassword();
+                    }}>
                     <Text style={styles.secoundryBtnText}> Reset </Text>
                   </TouchableOpacity>
                 </View>
               </>
             )}
           </Formik>
+          {isPassGenerated ? (
+            <View>
+              <Text> {password}</Text>
+            </View>
+          ) : null}
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -174,7 +182,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 12,
+    marginTop: 16,
+    marginBottom: 32,
   },
   inputColumn: {
     flex: 1,
